@@ -1,3 +1,3 @@
 # Drupal Twig Tricks
 
-See the other files in here.
+See the other pages in here.
