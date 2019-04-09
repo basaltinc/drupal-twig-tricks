@@ -8,6 +8,20 @@ Assuming you have a `paragraph` of type `card`, with an image field of `field_my
 
 In `img`, you'll end ups with something like `public://images/ocean.jpg` that you still need to transform using an image style into an actual usable image path like `/files/image.jpg`.
 
+Pass that through [Drupal's `file_url()` twig function](https://www.drupal.org/docs/8/theming/twig/functions-in-twig-templates#file_url) to get the actual root relative path:
+
+```twig
+{% set img = node.field_image.entity.getFileUri() %}
+{# result: public://images/ocean.jpg #}
+
+{% set imgUrl = file_url(img) %}
+{# result: /sites/default/files/ocean.jpg #}
+
+{# requires `twig_tweak` Drupal module #}
+{% set smallImgUrl = img | image_style('small') %}
+{# result: /sites/default/files/styles/medium/ocean.jpg #}
+```
+
 ## Image Styles
 
 If you've installed the `twig_tweak` Drupal module, then you can use this filter: `| image_style('small')`.
@@ -19,10 +33,17 @@ image path is: {{ 'public://images/ocean.jpg' | image_style('thumbnail') }}
 ```
 
 ```twig
-{% set img = node.field_featured_image.entity.field_image.entity.getFileUri() %}
+{% set img = paragraph.field_my_image.entity.getFileUri() %}
+{# result: public://images/ocean.jpg #}
 
-{% smallImg = img | image_style('small') %}
-{% panoImg = img | image_style('16x9') %}
+{% set imgUrl = file_url(img) %}
+{# result: /sites/default/files/ocean.jpg #}
+
+{% set smallImgUrl = img | image_style('small') %}
+{# result: /sites/default/files/styles/small/ocean.jpg #}
+
+{% panoImgUrl = img | image_style('16x9') %}
+{# result: /sites/default/files/styles/16x9/ocean.jpg #}
 ```
 
 ### Nested Entity References

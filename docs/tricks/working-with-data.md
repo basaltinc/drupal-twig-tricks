@@ -23,14 +23,16 @@
 ## A Good Strategy for starting files
 
 ```twig
+{% set comp = node.field_competition.entity %}
+
 {% set data = {
   location: node.field_location.value,
   has_audio: node.field_has_audio.value,
   comment: node.field_comment.value,
   score_opponent: node.field_score_opponent.value,
   highlights: node.field_match_highlights.value,
-  competition: node.field_competition.entity.field_name.value,
-  competition_logo: node.field_competition.entity.field_logo.entity.getFileUri() | image_style('small'),
+  competition: comp.field_name.value,
+  competition_logo: comp.field_logo.entity.getFileUri() | image_style('small'),
 } %}
 
 {# Great for debugging; comment it when not needed #}
@@ -51,7 +53,7 @@ Due to `value` being accessed, it'll crash:
 
 ```twig
 <ol>
-  {% for key,value in data %}
+  {% for key, value in data %}
     <li>{{ key }} - {{ value }}</li>
   {% endfor %}
 </ol>
