@@ -11,3 +11,11 @@ This will print all the keys of all data available. We don't print `value` as th
   {% endfor %}
 </ol>
 ```
+
+## Full JSON output
+
+```twig
+<pre><code>{{ _context|json_encode(constant('JSON_PRETTY_PRINT')) }}</code></pre>
+```
+
+Be careful with a full `_context` output as that can be crazy in Drupal, often it's best to dump specific variables.
