@@ -19,7 +19,7 @@ Pass that through [Drupal's `file_url()` twig function](https://www.drupal.org/d
 
 {# requires `twig_tweak` Drupal module #}
 {% set smallImgUrl = img | image_style('small') %}
-{# result: /sites/default/files/styles/medium/ocean.jpg #}
+{# result: /sites/default/files/styles/small/ocean.jpg #}
 ```
 
 ## Image Styles
